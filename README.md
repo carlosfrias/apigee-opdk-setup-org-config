@@ -20,14 +20,14 @@ Dependencies
 
 This role depends on the following roles:
 
-* opdk-setup-default-settings
+* apigee-opdk-setup-default-settings
 
 Example Playbook
 ----------------
 
     - hosts: servers
       roles:
-         - { role: opdk-setup-org-config }
+         - { role: apigee-opdk-setup-org-config }
 
 License
 -------
