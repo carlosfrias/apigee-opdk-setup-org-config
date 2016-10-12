@@ -45,7 +45,8 @@ VHOST_ALIAS={{ groups['dc-1-rmp'][0] }}
 {% endif %}
 
 # If you do not have a DNS entry for the virtual host,
-# specify the IP and port of each router as a space-separated list: # VHOST_ALIAS="firstRouterIP:9001 secondRouterIP:9001"
+# specify the IP and port of each router as a space-separated list:
+# VHOST_ALIAS="firstRouterIP:9001 secondRouterIP:9001"
 # Specify the analytics group.
 # Default name is axgroup001.use sys admin as organization administrator.
 AXGROUP={{ ax_group }}
