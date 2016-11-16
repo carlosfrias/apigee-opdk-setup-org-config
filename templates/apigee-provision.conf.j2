@@ -38,10 +38,12 @@ VHOST_PORT={{ virtual_host_port }}
 VHOST_NAME={{ virtual_host_name }}
 
 # If you have a DNS entry for the virtual host.
-{% if groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
-VHOST_ALIAS={{ groups['dc-2-rmp'][0] }}
+{% if groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] %}
+VHOST_ALIAS="{{ groups['dc-3-rmp'] | join(' ') }}"
+{% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
+VHOST_ALIAS="{{ groups['dc-2-rmp'] | join(' ') }}"
 {% else %}
-VHOST_ALIAS={{ groups['dc-1-rmp'][0] }}
+VHOST_ALIAS="{{ groups['dc-1-rmp'] | join(' ') }}"
 {% endif %}
 
 # If you do not have a DNS entry for the virtual host,
