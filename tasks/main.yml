@@ -5,7 +5,7 @@
   ignore_errors: true
   wait_for:
     port: '{{ ms_ext_mgmt_port }}'
-    host: '{{ local_address }}'
+    host: '{{ private_address }}'
     timeout: 1
 
 - name: Management Server Port Status report
