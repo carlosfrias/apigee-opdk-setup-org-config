@@ -43,10 +43,10 @@ VHOST_ALIAS="{{ vhost_alias }}"
 {% else %}
 {% if groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] %}
 VHOST_ALIAS="{{ groups['dc-3-rmp'] | join(' ') }}"
-{% elif groups['dc2'] is defined and inventory_hostname in groups['dc2'] %}
-VHOST_ALIAS="{{ groups['dc2-rmp'] | join(' ') }}"
+{% elif groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] %}
+VHOST_ALIAS="{{ groups['dc-2-rmp'] | join(' ') }}"
 {% else %}
-VHOST_ALIAS="{{ groups['dc1-rmp'] | join(' ') }}"
+VHOST_ALIAS="{{ groups['dc-1-rmp'] | join(' ') }}"
 {% endif %}
 {% endif %}
 
