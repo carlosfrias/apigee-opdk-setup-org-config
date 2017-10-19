@@ -1,5 +1,4 @@
 ---
-
 - name: Checking for Management Server Port
   register: ms_ext_mgmt_port_status
   ignore_errors: true
@@ -17,5 +16,22 @@
     msg: "Management server is not running"
   when: ms_ext_mgmt_port_status | failed
 
-- include: 4160100-main.yml
-  when: opdk_version | version_compare('4.16.01', '>=')
+- name: Remove old apigee-provision file
+  file:
+    path: '{{ onboarding_config_file_path }}'
+    state: absent
+  when: provided_onboarding_config_file_path is not defined
+
+- name: Prepare onboarding config file
+  template:
+    src: '{{ onboarding_config }}.j2'
+    dest: '{{ onboarding_config_file_path }}'
+    mode: 0644
+  when: provided_onboarding_config_file_path is not defined
+
+- name: Copy provided onboarding config file
+  copy:
+    src: '{{ provided_onboarding_config_file_path }}'
+    dest: '{{ onboarding_config_file_path }}'
+    mode: 0644
+  when: provided_onboarding_config_file_path is defined
