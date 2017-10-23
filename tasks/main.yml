@@ -16,16 +16,16 @@
     msg: "Management server is not running"
   when: ms_ext_mgmt_port_status | failed
 
+- name: Construct name of edge response validate file
+  cache:
+    key: 'onboarding_config_file_path'
+    value: '{{ opdk_installer_path }}/edge-response-validate-{{ opdk_version }}-{{ region }}.conf'
+
 - name: Remove old apigee-provision file
   file:
     path: '{{ onboarding_config_file_path }}'
     state: absent
   when: provided_onboarding_config_file_path is not defined
-
-- name: Construct name of edge response validate file
-  cache:
-    key: 'onboarding_config_file_path'
-    value: '{{ opdk_installer_path }}/edge-response-validate-{{ opdk_version }}-{{ region }}.conf'
 
 - name: Prepare onboarding config file
   template:
