@@ -28,7 +28,7 @@
   when: provided_onboarding_config_file_path is not defined
 
 - name: Initialize RMP addresses
-  set_facts:
+  set_fact:
     vhost_alias: ''
 
 - block:
