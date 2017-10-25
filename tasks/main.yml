@@ -28,8 +28,8 @@
   when: provided_onboarding_config_file_path is not defined
 
 - name: Initialize RMP addresses
-  - set_fact:
-      vhost_alias: ''
+  set_fact:
+    vhost_alias: ''
 
 - block:
   - name: Set vhost_alias to load_balancer
