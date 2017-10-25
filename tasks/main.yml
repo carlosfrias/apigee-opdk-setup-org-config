@@ -27,6 +27,40 @@
     state: absent
   when: provided_onboarding_config_file_path is not defined
 
+- name: Initialize RMP addresses
+  set_facts:
+    vhost_alias: ''
+
+- block:
+  - name: Set vhost_alias to load_balancer
+    cache:
+      key: "vhost_alias"
+      value: "{{ load_balancer }}"
+  when: load_balancer is defined and load_balancer | trim | length > 0
+
+- block:
+  - name: Collect DC 1 RMP addresses
+    cache:
+      key: "vhost_alias"
+      value: "{{ vhost_alias }} {{ hostvars[item].private_address }}"
+    with_items: "{{ groups['dc-1-rmp'] }}"
+    when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1']
+
+  - name: Collect DC 2 RMP addresses
+    cache:
+      key: "vhost_alias"
+      value: "{{ vhost_alias }} {{ hostvars[item].private_address }}"
+    with_items: "{{ groups['dc-2-rmp'] }}"
+    when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2']
+
+  - name: Collect DC 3 RMP addresses
+    cache:
+      key: "vhost_alias"
+      value: "{{ vhost_alias }} {{ hostvars[item].private_address }}"
+    with_items: "{{ groups['dc-3-rmp'] }}"
+    when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3']
+  when: load_balancer is not defined or load_balancer | trim | length == 0
+
 - name: Prepare onboarding config file
   template:
     src: 'apigee-provision.conf.j2'
