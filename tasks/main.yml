@@ -42,21 +42,21 @@
   - name: Collect DC 1 RMP addresses
     cache:
       key: "vhost_alias"
-      value: "{{ vhost_alias }} {{ hostvars[item].private_address }}"
+      value: "{{ vhost_alias }} {{ hostvars[item].public_address }}"
     with_items: "{{ groups['dc-1-rmp'] }}"
     when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1']
 
   - name: Collect DC 2 RMP addresses
     cache:
       key: "vhost_alias"
-      value: "{{ vhost_alias }} {{ hostvars[item].private_address }}"
+      value: "{{ vhost_alias }} {{ hostvars[item].public_address }}"
     with_items: "{{ groups['dc-2-rmp'] }}"
     when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2']
 
   - name: Collect DC 3 RMP addresses
     cache:
       key: "vhost_alias"
-      value: "{{ vhost_alias }} {{ hostvars[item].private_address }}"
+      value: "{{ vhost_alias }} {{ hostvars[item].public_address }}"
     with_items: "{{ groups['dc-3-rmp'] }}"
     when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3']
   when: load_balancer is not defined or load_balancer | trim | length == 0
