@@ -19,7 +19,7 @@
 - name: Construct name of edge response validate file
   cache:
     key: 'onboarding_config_file_path'
-    value: '{{ opdk_installer_path }}/edge-response-validate-{{ opdk_version }}-{{ opdk_region }}.conf'
+    value: '{{ opdk_installer_path }}/edge-response-validate-{{ opdk_version }}-{{ region }}.conf'
 
 - name: Remove old apigee-provision file
   file:
