@@ -14,6 +14,7 @@ ORG_NAME={{ org_name }} # lowercase only, no spaces, underscores, or periods.
 # Create a new user for the organization administrator.
 NEW_USER="{{ new_user }}"
 {% if new_user == 'y' %}
+
 # New user information if NEW_USER="y". USER_NAME=new@user.com
 USER_NAME={{ opdk_user_email }}
 FIRST_NAME={{ first_name }}
