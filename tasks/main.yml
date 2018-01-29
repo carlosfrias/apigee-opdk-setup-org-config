@@ -22,6 +22,7 @@
     value: '{{ opdk_installer_path }}/edge-response-validate-{{ opdk_version }}-{{ region }}.conf'
 
 - name: Remove old apigee-provision file
+  become: yes
   file:
     path: '{{ onboarding_config_file_path }}'
     state: absent
@@ -67,8 +68,6 @@
     src: 'apigee-provision.conf.j2'
     dest: '{{ onboarding_config_file_path }}'
     mode: 0644
-    owner: "{{ opdk_user_name }}"
-    group: "{{ opdk_group_name }}"
   when: provided_onboarding_config_file_path is not defined
 
 - name: Copy provided onboarding config file
@@ -77,6 +76,4 @@
     src: '{{ provided_onboarding_config_file_path }}'
     dest: '{{ onboarding_config_file_path }}'
     mode: 0644
-    owner: "{{ opdk_user_name }}"
-    group: "{{ opdk_group_name }}"
   when: provided_onboarding_config_file_path is defined
