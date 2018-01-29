@@ -61,13 +61,13 @@
     when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3']
   when: load_balancer is not defined or load_balancer | trim | length == 0
 
-
-
 - name: Prepare onboarding config file
   template:
     src: 'apigee-provision.conf.j2'
     dest: '{{ onboarding_config_file_path }}'
     mode: 0644
+    owner: "{{ opdk_user_name }}"
+    group: "{{ opdk_group_name }}"
   when: provided_onboarding_config_file_path is not defined
 
 - name: Copy provided onboarding config file
@@ -75,4 +75,6 @@
     src: '{{ provided_onboarding_config_file_path }}'
     dest: '{{ onboarding_config_file_path }}'
     mode: 0644
+    owner: "{{ opdk_user_name }}"
+    group: "{{ opdk_group_name }}"
   when: provided_onboarding_config_file_path is defined
