@@ -60,7 +60,6 @@
       value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-3-rmp'] }}"
     when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] and groups['dc-3-rmp'] is defined
-  when: ( load_balancer is not defined or load_balancer | trim | length == 0 )
 
   - name: Collect DC 1 Router addresses
     cache:
@@ -82,6 +81,7 @@
       value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-3-r'] }}"
     when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] and groups['dc-3-r'] is defined
+
   when: ( load_balancer is not defined or load_balancer | trim | length == 0 )
 
 - name: Prepare onboarding config file
