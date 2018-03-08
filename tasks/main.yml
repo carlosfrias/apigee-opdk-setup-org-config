@@ -45,22 +45,44 @@
       key: "vhost_alias"
       value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-1-rmp'] }}"
-    when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1']
+    when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1-rmp'] is defined
 
   - name: Collect DC 2 RMP addresses
     cache:
       key: "vhost_alias"
       value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-2-rmp'] }}"
-    when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2']
+    when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] and groups['dc-2-rmp'] is defined
 
   - name: Collect DC 3 RMP addresses
     cache:
       key: "vhost_alias"
       value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-3-rmp'] }}"
-    when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3']
-  when: load_balancer is not defined or load_balancer | trim | length == 0
+    when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] and groups['dc-3-rmp'] is defined
+  when: ( load_balancer is not defined or load_balancer | trim | length == 0 )
+
+  - name: Collect DC 1 Router addresses
+    cache:
+      key: "vhost_alias"
+      value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
+    with_items: "{{ groups['dc-1-r'] }}"
+    when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] and and groups['dc-1-r'] is defined
+
+  - name: Collect DC 2 Router addresses
+    cache:
+      key: "vhost_alias"
+      value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
+    with_items: "{{ groups['dc-2-r'] }}"
+    when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] and groups['dc-2-r'] is defined
+
+  - name: Collect DC 3 Router addresses
+    cache:
+      key: "vhost_alias"
+      value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
+    with_items: "{{ groups['dc-3-r'] }}"
+    when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] and groups['dc-3-r'] is defined
+  when: ( load_balancer is not defined or load_balancer | trim | length == 0 )
 
 - name: Prepare onboarding config file
   become: yes
