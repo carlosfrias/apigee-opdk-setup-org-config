@@ -66,7 +66,7 @@
       key: "vhost_alias"
       value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-1-r'] }}"
-    when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] and and groups['dc-1-r'] is defined
+    when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1-r'] is defined
 
   - name: Collect DC 2 Router addresses
     cache:
