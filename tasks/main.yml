@@ -30,55 +30,55 @@
 
 - name: Initialize RMP addresses
   set_fact:
-    vhost_alias: ''
+    virtual_host_alias: ''
 
 - block:
-  - name: Set vhost_alias to load_balancer
+  - name: Set virtual_host_alias to load_balancer
     cache:
-      key: "vhost_alias"
+      key: "virtual_host_alias"
       value: "{{ load_balancer | trim }}"
   when: load_balancer is defined and load_balancer | trim | length > 0
 
 - block:
   - name: Collect DC 1 RMP addresses
     cache:
-      key: "vhost_alias"
-      value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
+      key: "virtual_host_alias"
+      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-1-rmp'] }}"
     when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1-rmp'] is defined
 
   - name: Collect DC 2 RMP addresses
     cache:
-      key: "vhost_alias"
-      value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
+      key: "virtual_host_alias"
+      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-2-rmp'] }}"
     when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] and groups['dc-2-rmp'] is defined
 
   - name: Collect DC 3 RMP addresses
     cache:
-      key: "vhost_alias"
-      value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
+      key: "virtual_host_alias"
+      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-3-rmp'] }}"
     when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] and groups['dc-3-rmp'] is defined
 
   - name: Collect DC 1 Router addresses
     cache:
-      key: "vhost_alias"
-      value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
+      key: "virtual_host_alias"
+      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-1-r'] }}"
     when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1-r'] is defined
 
   - name: Collect DC 2 Router addresses
     cache:
-      key: "vhost_alias"
-      value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
+      key: "virtual_host_alias"
+      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-2-r'] }}"
     when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] and groups['dc-2-r'] is defined
 
   - name: Collect DC 3 Router addresses
     cache:
-      key: "vhost_alias"
-      value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
+      key: "virtual_host_alias"
+      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-3-r'] }}"
     when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] and groups['dc-3-r'] is defined
 
@@ -99,7 +99,7 @@
       - env_name is defined
       - virtual_host_port is defined
       - virtual_host_name is defined
-      - vhost_alias is defined
+      - virtual_host_alias is defined
       - ax_group is defined
       - use_all_mps is defined
     msg: "Please provide the missing attributes"
