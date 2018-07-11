@@ -29,8 +29,9 @@
   when: provided_onboarding_config_file_path is not defined
 
 - name: Initialize RMP addresses
-  set_fact:
-    virtual_host_alias: ''
+  cache:
+    key: 'virtual_host_alias'
+    value: ''
 
 - block:
   - name: Set virtual_host_alias to load_balancer
