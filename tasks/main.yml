@@ -82,14 +82,27 @@
     with_items: "{{ groups['dc-3-r'] }}"
     when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] and groups['dc-3-r'] is defined
 
-  - name: Collect AIO Router addresses
-    cache:
-      key: "vhost_alias"
-      value: "{{ hostvars[item].private_address | trim }}"
-    with_items: "{{ groups['aio'] }}"
-    when: groups['aio'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1'] is defined
-
   when: ( load_balancer is not defined or load_balancer | trim | length == 0 )
+
+- name: Assert attributes are available
+  assert:
+    that:
+      - local_mgmt_ip is defined
+      - opdk_user_email is defined
+      - opdk_user_pass is defined
+      - org_name is defined
+      - new_user is defined
+      - opdk_user_email is defined
+      - first_name is defined
+      - last_name is defined
+      - opdk_user_pass is defined
+      - env_name is defined
+      - virtual_host_port is defined
+      - virtual_host_name is defined
+      - vhost_alias is defined
+      - ax_group is defined
+      - use_all_mps is defined
+    msg: "Please provide the missing attributes"
 
 - name: Prepare onboarding config file
   become: yes
