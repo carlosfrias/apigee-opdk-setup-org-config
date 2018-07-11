@@ -85,7 +85,7 @@
   - name: Collect AIO Router addresses
     cache:
       key: "vhost_alias"
-      value: "{{ vhost_alias | trim }} {{ hostvars[item].private_address | trim }}"
+      value: "{{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['aio'] }}"
     when: groups['aio'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1'] is defined
 
