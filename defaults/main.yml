@@ -1,3 +1,4 @@
 ---
 # defaults file for apigee-opdk-setup-org-config
 use_all_mps: y
+ms_ext_mgmt_port: 8080
