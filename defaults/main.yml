@@ -9,3 +9,8 @@ org_name: opdk
 # Default for creating a new user in org
 new_user: 'y'
 
+# Default for first_name in creating new user
+first_name: Opdk
+
+# Default for last_name in creating new user
+last_name: User
