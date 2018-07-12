@@ -6,6 +6,9 @@ ms_ext_mgmt_port: 8080
 # Organization name used in Edge
 org_name: opdk
 
+# Environment name
+env_name: test
+
 # Default for creating a new user in org
 new_user: 'y'
 
