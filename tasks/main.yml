@@ -1,15 +1,10 @@
 ---
 - name: Checking for Management Server Port
   register: ms_ext_mgmt_port_status
-  ignore_errors: true
   wait_for:
     port: '{{ ms_ext_mgmt_port }}'
     host: '{{ private_address }}'
     timeout: 1
-
-- name: Management Server Port Status report
-  debug:
-    var: ms_ext_mgmt_port_status
 
 - name: Management server is not running
   fail:
@@ -103,6 +98,7 @@
       - virtual_host_alias is defined
       - ax_group is defined
       - use_all_mps is defined
+      - ms_ext_mgmt_port is defined
     msg: "Please provide the missing attributes"
 
 - name: Prepare onboarding config file
