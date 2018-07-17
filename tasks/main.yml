@@ -9,7 +9,7 @@
 - name: Management server is not running
   fail:
     msg: "Management server is not running"
-  when: ms_ext_mgmt_port_status | failed
+  when: ms_ext_mgmt_port_status is failed
 
 - name: Construct name of edge response validate file
   cache:
