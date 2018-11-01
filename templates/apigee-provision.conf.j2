@@ -3,7 +3,7 @@ MSIP="{{ local_mgmt_ip }}"
 
 # Specify the Edge admin credentials.
 ADMIN_EMAIL={{ opdk_user_email }}
-APIGEE_ADMINPW={{ opdk_user_pass }} # If omitted, you are prompted for it.
+APIGEE_ADMINPW="{{ opdk_user_pass }}" # If omitted, you are prompted for it.
 
 # Specify organization name and administrator.
 ORG_NAME={{ org_name }} # lowercase only, no spaces, underscores, or periods.
@@ -19,7 +19,7 @@ NEW_USER="{{ new_user }}"
 USER_NAME={{ opdk_user_email }}
 FIRST_NAME={{ first_name }}
 LAST_NAME={{ last_name }}
-USER_PWD={{ opdk_user_pass }}
+USER_PWD="{{ opdk_user_pass }}"
 ORG_ADMIN={{ opdk_user_email }}
 
 {% else %}
