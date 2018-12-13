@@ -26,7 +26,7 @@
 - name: Set virtual_host_alias to load_balancer
   cache:
     key: "virtual_host_alias"
-    value: "{{ load_balancer | trim  | default ('') }}"
+    value: "{{ load_balancer | default ('') }}"
 
 - block:
   - name: Collect DC 1 RMP addresses
