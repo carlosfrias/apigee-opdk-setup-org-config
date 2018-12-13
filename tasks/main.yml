@@ -1,15 +1,15 @@
 ---
 - name: Checking for Management Server Port
-  register: ms_ext_mgmt_port_status
+  register: ms_port_status
   wait_for:
-    port: '{{ ms_ext_mgmt_port }}'
+    port: '{{ ms_port }}'
     host: '{{ private_address }}'
     timeout: 1
 
 - name: Management server is not running
   fail:
     msg: "Management server is not running"
-  when: ms_ext_mgmt_port_status is failed
+  when: ms_port_status is failed
 
 - name: Construct name of edge response validate file
   cache:
@@ -23,17 +23,10 @@
     state: absent
   when: provided_onboarding_config_file_path is not defined
 
-- name: Initialize RMP addresses
+- name: Set virtual_host_alias to load_balancer
   cache:
-    key: 'virtual_host_alias'
-    value: ''
-
-- block:
-  - name: Set virtual_host_alias to load_balancer
-    cache:
-      key: "virtual_host_alias"
-      value: "{{ load_balancer | trim }}"
-  when: load_balancer is defined and load_balancer | trim | length > 0
+    key: "virtual_host_alias"
+    value: "{{ load_balancer | trim  | default ('') }}"
 
 - block:
   - name: Collect DC 1 RMP addresses
@@ -98,7 +91,7 @@
       - virtual_host_alias is defined
       - ax_group is defined
       - use_all_mps is defined
-      - ms_ext_mgmt_port is defined
+      - ms_port is defined
     msg: "Please provide the missing attributes, it can be either added to either custom-properties.yml or credentials.yml or passed as -e key=value"
 
 
