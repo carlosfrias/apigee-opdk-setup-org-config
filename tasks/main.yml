@@ -12,9 +12,9 @@
   when: ms_port_status is failed
 
 - name: Construct name of edge response validate file
-  cache:
-    key: 'onboarding_config_file_path'
-    value: '{{ opdk_installer_path }}/edge-response-validate-{{ opdk_version }}-{{ region }}.conf'
+  set_fact:
+    cacheable: yes
+    onboarding_config_file_path: '{{ opdk_installer_path }}/edge-response-validate-{{ opdk_version }}-{{ region }}.conf'
 
 - name: Remove old apigee-provision file
   become: yes
@@ -24,50 +24,50 @@
   when: provided_onboarding_config_file_path is not defined
 
 - name: Set virtual_host_alias to load_balancer
-  cache:
-    key: "virtual_host_alias"
-    value: "{{ load_balancer | default ('') }}"
+  set_fact:
+    cacheable: yes
+    virtual_host_alias: "{{ load_balancer | default ('') }}"
 
 - block:
   - name: Collect DC 1 RMP addresses
-    cache:
-      key: "virtual_host_alias"
-      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
+    set_fact:
+      cacheable: yes
+      virtual_host_alias: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-1-rmp'] }}"
     when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1-rmp'] is defined
 
   - name: Collect DC 2 RMP addresses
-    cache:
-      key: "virtual_host_alias"
-      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
+    set_fact:
+      cacheable: yes
+      virtual_host_alias: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-2-rmp'] }}"
     when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] and groups['dc-2-rmp'] is defined
 
   - name: Collect DC 3 RMP addresses
-    cache:
-      key: "virtual_host_alias"
-      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
+    set_fact:
+      cacheable: yes
+      virtual_host_alias: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-3-rmp'] }}"
     when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] and groups['dc-3-rmp'] is defined
 
   - name: Collect DC 1 Router addresses
-    cache:
-      key: "virtual_host_alias"
-      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
+    set_fact:
+      cacheable: yes
+      virtual_host_alias: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-1-r'] }}"
     when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1-r'] is defined
 
   - name: Collect DC 2 Router addresses
-    cache:
-      key: "virtual_host_alias"
-      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
+    set_fact:
+      cacheable: yes
+      virtual_host_alias: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-2-r'] }}"
     when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] and groups['dc-2-r'] is defined
 
   - name: Collect DC 3 Router addresses
-    cache:
-      key: "virtual_host_alias"
-      value: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
+    set_fact:
+      cacheable: yes
+      virtual_host_alias: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
     with_items: "{{ groups['dc-3-r'] }}"
     when: groups['dc-3'] is defined and inventory_hostname in groups['dc-3'] and groups['dc-3-r'] is defined
 
