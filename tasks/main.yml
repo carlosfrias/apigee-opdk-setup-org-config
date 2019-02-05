@@ -14,7 +14,7 @@
 - name: Construct name of edge response validate file
   set_fact:
     cacheable: yes
-    onboarding_config_file_path: '{{ opdk_installer_path }}/edge-response-validate-{{ opdk_version }}-{{ region }}.conf'
+    onboarding_config_file_path: '{{ opdk_resources_path }}/edge-response-validate-{{ opdk_version }}-{{ region }}.conf'
 
 - name: Remove old apigee-provision file
   become: yes
