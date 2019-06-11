@@ -16,9 +16,9 @@ NEW_USER="{{ new_user }}"
 {% if new_user == 'y' %}
 
 # New user information if NEW_USER="y". USER_NAME=new@user.com
-USER_NAME={{ opdk_user_email | default('opdk@apigee.com') }}
-FIRST_NAME={{ first_name | default("opdk") }}
-LAST_NAME={{ last_name | default('apigee') }}
+USER_NAME={{ opdk_user_email }}
+FIRST_NAME={{ first_name | default("NoUserNameProvided") }}
+LAST_NAME={{ last_name | default('NoUserNameProvided') }}
 USER_PWD="{{ opdk_user_pass }}"
 ORG_ADMIN={{ opdk_user_email }}
 
