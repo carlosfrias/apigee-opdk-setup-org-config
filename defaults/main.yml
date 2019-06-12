@@ -4,7 +4,7 @@
 ms_port: 8080
 
 # Organization name used in Edge
-org_name: opdk
+#org_name: opdk
 
 ## Environment name
 #env_name: test
