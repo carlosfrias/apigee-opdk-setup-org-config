@@ -90,7 +90,6 @@
       - virtual_host_name is defined
       - virtual_host_alias is defined
       - ax_group is defined
-      - use_all_mps is defined
       - ms_port is defined
     msg: "Please provide the missing attributes, it can be either added to either custom-properties.yml or credentials.yml or passed as -e key=value"
 
