@@ -33,15 +33,15 @@
     set_fact:
       cacheable: yes
       virtual_host_alias: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
-    with_items: "{{ groups['dc-1-rmp'] }}"
-    when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] and groups['dc-1-rmp'] is defined
+    with_items: "{{ groups['dc_1_rmp'] }}"
+    when: groups['dc-1'] is defined and inventory_hostname in groups['dc-1'] and groups['dc_1_rmp'] is defined
 
   - name: Collect DC 2 RMP addresses
     set_fact:
       cacheable: yes
       virtual_host_alias: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
-    with_items: "{{ groups['dc-2-rmp'] }}"
-    when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] and groups['dc-2-rmp'] is defined
+    with_items: "{{ groups['dc_2_rmp'] }}"
+    when: groups['dc-2'] is defined and inventory_hostname in groups['dc-2'] and groups['dc_2_rmp'] is defined
 
   - name: Collect DC 3 RMP addresses
     set_fact:
