@@ -21,7 +21,7 @@ last_name: NoNameProvided
 virtual_host_port: 9001
 
 ## Virtual Host name for the org
-#virtual_host_name: default
+virtual_host_name: default
 
 ## Virtual host alias
 #virtual_host_alias: '127.0.0.1'
