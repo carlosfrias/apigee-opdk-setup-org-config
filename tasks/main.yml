@@ -110,5 +110,6 @@
   copy:
     src: '{{ provided_onboarding_config_file_path }}'
     dest: '{{ onboarding_config_file_path }}'
+    force: yes
     mode: 0644
   when: provided_onboarding_config_file_path is defined
