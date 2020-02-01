@@ -52,11 +52,11 @@
 #    with_items: "{{ groups['dc_3_rmp'] }}"
 #    when: groups['dc_3'] is defined and inventory_hostname in groups['dc_3'] and groups['dc_3_rmp'] is defined
 
-  - name: Collect DC 1 Router addresses
-    set_fact:
-      cacheable: yes
-      virtual_host_alias: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
-    with_items: "{{ groups['dc_1_r'] }}"
+#  - name: Collect DC 1 Router addresses
+#    set_fact:
+#      cacheable: yes
+#      virtual_host_alias: "{{ virtual_host_alias | trim }} {{ hostvars[item].private_address | trim }}"
+#    with_items: "{{ groups['dc_1_r'] }}"
 #    when: groups['dc_1'] is defined and inventory_hostname in groups['dc_1'] and groups['dc_1_r'] is defined
 #
 #  - name: Collect DC 2 Router addresses
